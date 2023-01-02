@@ -1,85 +1,70 @@
-//Initial References
-let Result = Document.getElementById("Result");
-let SearchBtn = Document.getElementById("Search-Btn");
-let Url = "Https://Www.Themealdb.Com/Api/Json/V1/1/Search.Php?S=";
+let result = document.getElementById("result");
+let searchBtn = document.getElementById("search-btn");
+let url = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
 
-SearchBtn.AddEventListener("Click", () => {
-    let UserInp = Document.getElementById("User-Inp").Value;
-  If (UserInp.Length == 0) {
-    Result.InnerHTML = `<H3>Input Field Cannot Be Empty</H3>`;
-  } else {
-    fetch(Url + UserInp)
-      .then((Response) => Response.Json())
-      .then((Data) => {
-        let MyMeal = Data.Meals[0];
-        Console.Log(MyMeal);
-        Console.Log(MyMeal.StrMealThumb);
-        Console.Log(MyMeal.StrMeal);
-        Console.Log(MyMeal.StrArea);
-        Console.Log(MyMeal.StrInstructions);
-        let Count = 1;
-        let Ingredients = [];
-        For (let I In MyMeal) {
-            let Ingredient = "";
-            let Measure = "";
-          If (I.StartsWith("StrIngredient") && MyMeal[I]) {
-            Ingredient = MyMeal[I];
-            Measure = MyMeal[`StrMeasure` + Count];
-            Count += 1;
-            Ingredients.Push(`${Measure} ${Ingredient}`);
+searchBtn.addEventListener("click", () => {
+  let userInp = document.getElementById("user-inp").value;
+  if (userInp.length == 0) {
+    result.innerHTML = `<h3>Input Field Cannot Be Empty</h3>`;
+  }else {
+    fetch(url + userInp)
+      .then((response) => response.json())
+      .then((data) => {
+        let myMeal = data.meals[0];
+        console.log(myMeal);
+        console.log(myMeal.strMealThumb);
+        console.log(myMeal.strMeal);
+        console.log(myMeal.strArea);
+        console.log(myMeal.strInstructions);
+        let count = 1;
+        let ingredients = [];
+        for (let i in myMeal) {
+            let ingredient = "";
+            let measure = "";
+          if (i.startsWith("strIngredient") && myMeal[i]) {
+            ingredient = myMeal[i];
+            measure = myMeal[`strMeasure` + count];
+            count += 1;
+            ingredients.push(`${measure} ${ingredient}`);
           }
         }
-        Console.Log(Ingredients);
+        console.log(ingredients);
 
-        Result.InnerHTML = `
-    <Img Src=${MyMeal.StrMealThumb}>
-    <Div Class="Details">
-        <H2>${MyMeal.StrMeal}</H2>
-        <H4>${MyMeal.StrArea}</H4>
-    </Div>
-    <Div Id="Ingredient-Con"></Div>
-    <Div Id="Recipe">
-        <Button Id="Hide-Recipe">X</Button>
-        <Pre Id="Instructions">${MyMeal.StrInstructions}</Pre>
-    </Div>
-    <Button Id="Show-Recipe">View Recipe</Button>
-    `;
-    let IngredientCon = Document.getElementById("Ingredient-Con");
-    let Parent = Document.CreateElement("Ul");
-    let Recipe = Document.getElementById("Recipe");
-    let HideRecipe = Document.getElementById("Hide-Recipe");
-    let ShowRecipe = Document.getElementById("Show-Recipe");
+        result.innerHTML = `
+        <img src=${myMeal.strMealThumb}>
+        <div class="details">
+            <h2>${myMeal.strMeal}</h2>
+            <h4>${myMeal.strArea}</h4>
+        </div>
+        <div id="ingredient-con"></div>
+        <div id="recipe">
+            <button id="hide-recipe">X</button>
+            <pre id="instructions">${myMeal.strInstructions}</pre>
+        </div>
+        <button id="show-recipe">View Recipe</button>
+        `;
+        let ingredientCon = document.getElementById("ingredient-con");
+        let parent = document.createElement("ul");
+        let recipe = document.getElementById("recipe");
+        let hideRecipe = document.getElementById("hide-recipe");
+        let showRecipe = document.getElementById("show-recipe");
 
-        Ingredients.ForEach((I) => {
-        let Child = Document.CreateElement("Li");
-          Child.InnerText = I;
-          Parent.AppendChild(Child);
-          IngredientCon.AppendChild(Parent);
+        ingredients.forEach((i) => {
+        let child = document.createElement("li");
+          child.innerText = i;
+          parent.appendChild(child);
+          ingredientCon.appendChild(parent);
         });
 
-        HideRecipe.AddEventListener("Click", () => {
-          Recipe.Style.Display = "None";
+        hideRecipe.addEventListener("click", () => {
+          recipe.style.display = "none";
         });
-        ShowRecipe.AddEventListener("Click", () => {
-          Recipe.Style.Display = "Block";
+        showRecipe.addEventListener("click", () => {
+          recipe.style.display = "block";
         });
       })
-      .Catch(() => {
-        Result.InnerHTML = `<H3>Invalid Input</H3>`;
+      .catch(() => {
+        result.innerHTML = `<h3>Invalid Input</h3>`;
       });
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
