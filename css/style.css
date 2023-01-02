@@ -19,6 +19,12 @@ body{   background-color: blue;   }
     transform: translate(-50%, -50%);
 }
 
+button{
+    cursor: pointer;
+    transition: .2s all;
+}
+button:active{  transform: scale(.8);   }
+
 .search{
     width: 100%;
     display: grid;
@@ -27,16 +33,19 @@ body{   background-color: blue;   }
 }
 
 .search input{
-    padding: .6em;
     border: none;
     border-bottom: 2px solid #202030;
-    font-size: 1em;
+    text-align: center;
+    font-size: 1.1em;
+    text-transform: capitalize;
     outline: none;
 }
 
 .search button{
+    padding: 7px;
     font-size: 1em;
-    background-color: #f4c531;
+    background-color: blue;
+    color: #fff;
     border: none;
     font-weight: 600;
     border-radius: .3em;
@@ -49,9 +58,10 @@ img{
 }
 
 .details{
-    background-color: #f4c531;
     position: relative;
-    margin: -4.3em 0 0 0;
+    background-color: red;
+    color: #fff;
+    margin: -2.3em 0 0 0;
     text-align: center;
     padding: .6em 0;
 }
@@ -73,7 +83,8 @@ img{
     top: 1.5em;
     left: 75%;
     padding: .9em .6em;
-    background-color: #f4c531;
+    background-color: blue;
+    color: #fff;
     border: none;
     border-radius: .3em;
 }
@@ -84,6 +95,7 @@ img{
     width: 100%;
     display: none;
     top: 0;     left: 0;
+    background-color: #fff;
     border-radius: .6em;
     z-index: 2;
 }
@@ -93,7 +105,7 @@ img{
     word-wrap: break-word;
     padding: 2.5em 1.2em 1.2em 1.2em;
     font-size: .92em;
-    color: #303040;
+    color: #000;
 }
 
 #hide-recipe{
@@ -102,7 +114,9 @@ img{
     top: 1.2em;     left: 90%;
     height: 1.8em;
     font-size: 1em;
-    background-color: #f4c531;
+    font-weight: bold;
+    background-color: blue;
+    color: #fff;
     border: none;
     border-radius: .3em;
 }
@@ -111,10 +125,11 @@ ul{
     position: relative;
     display: grid;
     font-size: 1em;
+    font-weight: bold;
     grid-template-columns: auto auto;
     gap: .8em 1.1em;
     padding: 1.2em 0 0 1.2em;
-    color: #303040;
+    color: #000;
     text-transform: capitalize;
 }
 
